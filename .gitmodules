@@ -1,0 +1,3 @@
+[submodule "custom-rpi-pico-2"]
+	path = custom-rpi-pico-2
+	url = git@github.com:eddydpan/custom-rpi-pico-2.git
