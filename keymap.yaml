@@ -1,0 +1,138 @@
+# Legends for the paper prints (not firmware -- that comes later in QMK).
+#
+# Finger rows are written the way you SEE them on the desk, left to right:
+#   left half:  outer pinky ring middle index inner
+#   right half: inner index middle ring pinky outer
+# (outer = board edge, inner = toward the other half)
+#
+# Thumbs are named by role, same on both halves (see the naming note in ergogen.yaml):
+#   home = where the thumb rests, curl = one back toward the palm,
+#   palm = two back, extra = the 4th key placed relative to home.
+#
+# Use ~ for a blank key (quote it, '~', for a literal tilde). The first layer you
+# print is the big legend, later ones go in the corners (print-layout.mjs --layers).
+# Reasoning behind these choices lives in NOTES.md.
+
+# Shared by every alpha layer so the thumbs never change between layouts.
+_thumbs:
+  left: &thumbs_left   {home: Nav/Esc, curl: Ctrl,  extra: Bksp, palm: Meta}
+  right: &thumbs_right {home: Space,   curl: Enter, extra: Sym,  palm: Alt}
+
+layers:
+  qwerty:
+    left:
+      num:    [Esc,    '1', '2', '3', '4', '5']
+      top:    [Tab,    Q,   W,   E,   R,   T]
+      home:   [Shift,  A,   S,   D,   F,   G]
+      bottom: [~,      Z,   X,   C,   V,   B]
+      thumb:  *thumbs_left
+    right:
+      num:    ['6', '7', '8', '9', '0', '-']
+      top:    [Y,   U,   I,   O,   P,   '\']
+      home:   [H,   J,   K,   L,   ';', Shift]
+      bottom: [N,   M,   ',', '.', '/', "'"]
+      thumb:  *thumbs_right
+
+  # Trying first. Built for columnar boards. https://github.com/GalileoBlues/Gallium
+  gallium:
+    left:
+      num:    [Esc,    '1', '2', '3', '4', '5']
+      top:    [Tab,    B,   L,   D,   C,   V]
+      home:   [Shift,  N,   R,   T,   S,   G]
+      bottom: [~,      X,   Q,   M,   W,   Z]
+      thumb:  *thumbs_left
+    right:
+      num:    ['6', '7', '8', '9', '0', '-']
+      top:    [J,   Y,   O,   U,   ',', '\']
+      home:   [P,   H,   A,   E,   I,   Shift]
+      bottom: [K,   F,   "'", ';', '.', '/']
+      thumb:  *thumbs_right
+
+  # Strong alternative. https://github.com/rdavison/graphite-layout
+  graphite:
+    left:
+      num:    [Esc,    '1', '2', '3', '4', '5']
+      top:    [Tab,    B,   L,   D,   W,   Z]
+      home:   [Shift,  N,   R,   T,   S,   G]
+      bottom: [~,      Q,   X,   M,   C,   V]
+      thumb:  *thumbs_left
+    right:
+      num:    ['6', '7', '8', '9', '0', '=']
+      top:    ["'", F,   O,   U,   J,   ';']
+      home:   [Y,   H,   A,   E,   I,   Shift]
+      bottom: [K,   P,   '.', '-', '/', ',']
+      thumb:  *thumbs_right
+
+  colemak_dh:
+    left:
+      num:    [Esc,    '1', '2', '3', '4', '5']
+      top:    [Tab,    Q,   W,   F,   P,   B]
+      home:   [Shift,  A,   R,   S,   T,   G]
+      bottom: [~,      Z,   X,   C,   D,   V]
+      thumb:  *thumbs_left
+    right:
+      num:    ['6', '7', '8', '9', '0', '-']
+      top:    [J,   L,   U,   Y,   ';', '\']
+      home:   [M,   N,   E,   I,   O,   Shift]
+      bottom: [K,   H,   ',', '.', '/', "'"]
+      thumb:  *thumbs_right
+
+  dvorak:
+    left:
+      num:    [Esc,    '1', '2', '3', '4', '5']
+      top:    [Tab,    "'", ',', '.', P,   Y]
+      home:   [Shift,  A,   O,   E,   U,   I]
+      bottom: [~,      ';', Q,   J,   K,   X]
+      thumb:  *thumbs_left
+    right:
+      num:    ['6', '7', '8', '9', '0', '[']
+      top:    [F,   G,   C,   R,   L,   '/']
+      home:   [D,   H,   T,   N,   S,   Shift]
+      bottom: [B,   M,   W,   V,   Z,   '-']
+      thumb:  *thumbs_right
+
+  # Hold left home thumb. Arrows sit on QWERTY's physical h/j/k/l keys whatever the
+  # alpha layout is. Everything here sends layout-independent keycodes.
+  nav:
+    left:
+      num:    [Mouse, Desk1, Desk2, Desk3, Desk4, ~]     # Mouse = toggle mouse layer; Ctrl+F1..F4 in KDE
+      top:    [~, Undo,  Cut,   Copy,  Paste, Redo]
+      home:   [~, Meta,  Alt,   Ctrl,  Shift, ~]          # hold with arrows: select, tile...
+      bottom: [~, Close, Overvw, Run,  Tab<,  Tab>]       # Alt+F4, Meta+W, Alt+Space, Ctrl+(Shift+)Tab
+      thumb:  {home: (held)}
+    right:
+      num:    [Life, ~,    ~,    ~,     ~, ~]           # Life = cycle Game of Life mode (5 modes incl. off)
+      top:    [Home, PgDn, PgUp, End,   ~, ~]
+      home:   [Left, Down, Up,   Right, Del, ~]
+      bottom: [C-Lft, C-Rgt, Max, Min,  ~, ~]             # word jump; Meta+PgUp/PgDn
+      thumb:  {}
+
+  # Toggled from the nav layer (Nav + outer num key); same key turns it off.
+  mouse:
+    left:
+      num:    [(off), ~,     ~,     ~,     ~,     ~]
+      top:    [~,     Acc0,  Acc1,  Acc2,  ~,     ~]
+      home:   [~,     ~,     Btn3,  Btn2,  Btn1,  ~]
+      bottom: [~,     ~,     ~,     ~,     ~,     ~]
+      thumb:  {home: Btn1}
+    right:
+      num:    [~,    ~,    ~,    ~,    ~, ~]
+      top:    [WhLt, WhDn, WhUp, WhRt, ~, ~]
+      home:   [MsLt, MsDn, MsUp, MsRt, ~, ~]
+      bottom: [~,    ~,    ~,    ~,    ~, ~]
+      thumb:  {}
+
+  # Hold right extra thumb.
+  sym:
+    left:
+      num:    ['`', F1,  F2,  F3,  F4,  F5]
+      top:    ['~', '!', '@', '#', '$', '%']
+      home:   [~,   '(', ')', '{', '}', '=']
+      bottom: [~,   '[', ']', '<', '>', '+']
+      thumb:  {}
+    right:
+      num:    [F6,  F7,  F8,  F9,  F10, F11]
+      top:    ['^', '&', '*', '_', '-', F12]
+      home:   ['|', '\', '?', ':', '"', ~]
+      bottom: [~,   ~,   ~,   ~,   ~,   ~]
+      thumb:  {extra: (held)}

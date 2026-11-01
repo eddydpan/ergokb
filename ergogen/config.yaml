@@ -1,0 +1,301 @@
+meta:
+  engine: 4.1.0
+
+# ---------------------------------------------------------------
+# 6x4 + 4-thumb split, Choc spacing (cx = 18mm, cy = 17mm)
+# 28 keys per half / 56 total
+#
+# Naming (left half; the right half is the mirror image):
+#   columns: outer = board edge (pinky stretch) ... inner = toward the other half (index stretch)
+#   thumbs:  home  = where the thumb rests (the key closest to the other half)
+#            curl  = one key back toward the palm
+#            palm  = two keys back toward the palm
+#            extra = the 4th key, tucked below between curl and home
+#
+# Matrix (per half, COL2ROW, diode cathode toward the row):
+#   COL0..COL5 = outer..inner, COL6 = the four thumbs
+#   ROW0..ROW3 = num, top, home, bottom; thumbs: home ROW0, curl ROW1, palm ROW2, extra ROW3
+#
+# LED data chain (per half), set by `led_from` (the key whose LED feeds this one). Data starts
+# next to the MCU at the outer top corner; index = position in the WS2812 chain:
+#    0-3   outer   num -> bottom           16-19 index   num -> bottom
+#    4-7   pinky   bottom -> num           20-23 thumbs  palm, curl, extra, home
+#    8-11  ring    num -> bottom           24-27 inner   bottom -> num
+#   12-15  middle  bottom -> num
+#   Net LED_<colrow> is the DOUT of the LED at <colrow>; LED_MCU comes from the level shifter.
+# ---------------------------------------------------------------
+
+# Tuning knobs. KEY GEOMETRY FROZEN 2026-10-27 (paper-tested; PCB work builds on it).
+# Column staggers are cumulative: each one is relative to the column before it.
+units:
+  # Keycap face. Laptop keys are ~15.5-16 mm; Choc's standard cap is 17.5 x 16.5.
+  # Setting ergogen's default key size makes the ergogen.xyz preview show real keycap gaps.
+  $default_width: 16
+  $default_height: 15.5
+  cap_w: $default_width
+  cap_h: $default_height
+  pinky_splay: 0                   # deg; >0 leans pinky + outer column tops away from the
+                                   # ring finger. Tried 8 (2026-10-23): outer corners out of reach.
+  outer_stagger: 0                 # vs pinky; negative drops the outer column
+  ring_stagger: 0.66cy             # vs pinky; 1cy dropped the pinky a full row
+  middle_stagger: 0.25cy           # vs ring
+  index_stagger: -0.25cy           # vs middle
+  inner_stagger: -0.15cy           # vs index
+  # Thumb arc is anchored on its home key, measured from the inner column's bottom key.
+  # These values leave ~2.5-4.5 mm between every thumb key and the finger keys
+  # (a laptop space bar sits ~3 mm below the bottom row).
+  thumb_home_x: 7                  # mm toward the other half
+  thumb_home_y: -23.5              # mm down
+  thumb_home_r: -20                # deg; negative tilts home's top toward the other half
+  thumb_splay: 12                  # deg per key going back toward the palm (~75 mm thumb arc)
+  thumb_extra_drop: cy             # extra key sits this far below the curl/home midpoint
+  half_gap: 60                     # mm between the two thumb clusters (preview only)
+  # Top strip (not key geometry; free to change). The MCU circuit (RP2354A core from
+  # custom-rpi-pico-2) goes on the back in the MCU area: the free pocket between the outer edge,
+  # the ring column and the top edge, above the outer/pinky num keys. Host USB-C exits the outer
+  # edge there. The link USB-C sits on the back above the inner column, opening up.
+  top_margin: 1.5                  # strip's top edge, above the middle column's PCB edge;
+                                   # each extra mm here is 1 mm more MCU area (and board height)
+  usbc_w: 8.94                     # HRO TYPE-C-31-M-12 body
+  usbc_d: 7.35
+  # Derived positions. MCU area from the outer num key; link USB-C from the inner num key.
+  # 0.5cx + 1.5 is half a key's PCB block (cx + 3, see _left_raw).
+  mcu_area_w: 2cx                                             # outer edge to the ring column's block
+  mcu_area_h: ring_stagger + middle_stagger - outer_stagger + top_margin   # num-key blocks to top edge
+  mcu_x: -(0.5cx + 1.5) + 0.5mcu_area_w
+  mcu_y: 0.5cy + 1 + 0.5mcu_area_h
+  usbc_y: -index_stagger - inner_stagger + 0.5cy + 1 + top_margin - 0.5usbc_d
+  pcb_close: 4.5                   # mm; fills PCB-edge gaps narrower than 2x this (5 left a degenerate arc)
+
+points:
+  zones:
+    # Ring through inner. Ring sits where it would if the pinky column were at [50, -100].
+    matrix:
+      anchor:
+        shift: [50 + 2cx, -100 + ring_stagger]   # keeps KiCad origin sane
+      key:
+        spread: cx                 # Choc X pitch, 18mm
+        padding: cy                # Choc Y pitch, 17mm
+      # led_from names the LED that feeds this one: the neighbour up or down the column,
+      # or, at the column's start, a per-column override pointing into the previous column.
+      columns:
+        ring:
+          key.column_net: COL2
+          key.led_from: "{{col.name}}_{{up}}"
+          rows.num.led_from: pinky_num
+        middle:
+          key.stagger: middle_stagger
+          key.column_net: COL3
+          key.led_from: "{{col.name}}_{{down}}"
+          rows.bottom.led_from: ring_bottom
+        index:
+          key.stagger: index_stagger
+          key.column_net: COL4
+          key.led_from: "{{col.name}}_{{up}}"
+          rows.num.led_from: middle_num
+        inner:
+          key.stagger: inner_stagger
+          key.column_net: COL5
+          key.led_from: "{{col.name}}_{{down}}"
+          rows.bottom.led_from: home_thumb
+      rows: &finger_rows           # up/down: neighbouring rows, for led_from
+        bottom: {row_net: ROW3, up: home}
+        home: {row_net: ROW2, up: top, down: bottom}
+        top: {row_net: ROW1, up: num, down: home}
+        num: {row_net: ROW0, down: top}
+
+    # Pinky + outer columns, splayed as one block around the pinky column's
+    # bottom corner next to the ring finger. Keys keep their matrix_* names.
+    pinkies:
+      anchor:
+        - ref: matrix_ring_bottom
+          shift: [-0.5cx, -ring_stagger - 0.5cy]   # pivot: pinky bottom, ring-side corner
+        - rotate: pinky_splay
+        - shift: [-0.5cx, 0.5cy]                  # pivot -> pinky bottom key center
+      key:
+        spread: -cx                # columns grow toward the board edge
+        padding: cy
+        name: matrix_{{colrow}}
+      columns:
+        pinky:
+          key.column_net: COL1
+          key.led_from: "{{col.name}}_{{down}}"
+          rows.bottom.led_from: outer_bottom
+        outer:
+          key.stagger: outer_stagger
+          key.column_net: COL0
+          key.led_from: "{{col.name}}_{{up}}"
+          rows.num.led_from: MCU   # first LED, fed by the level shifter next to the MCU
+      rows: *finger_rows
+
+    # Built from home back toward the palm; each key hinges on the previous
+    # key's bottom corner, so the gaps open at the top like a fan.
+    thumb:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [thumb_home_x, thumb_home_y]
+        rotate: thumb_home_r
+      key:
+        spread: -cx
+        padding: cy
+        column_net: COL6
+      columns:
+        home:
+          key.name: thumb_home
+          key.row_net: ROW0
+          key.led_from: extra_thumb
+        curl:
+          key.splay: thumb_splay
+          key.origin: [0.5cx, -0.5cy]
+          key.name: thumb_curl
+          key.row_net: ROW1
+          key.led_from: palm_thumb
+        palm:
+          key.splay: thumb_splay
+          key.origin: [0.5cx, -0.5cy]
+          key.name: thumb_palm
+          key.row_net: ROW2
+          key.led_from: index_bottom
+      rows:
+        thumb:
+
+    thumb_extra:
+      anchor:
+        aggregate:
+          parts: [thumb_curl, thumb_home]
+        shift: [0, -thumb_extra_drop]
+      key:
+        column_net: COL6
+        row_net: ROW3
+        led_from: curl_thumb
+      columns:
+        extra:
+          key.name: thumb_extra
+      rows:
+        thumb:
+
+  # Right half = mirror image of the left. Points get a `mirror_` prefix.
+  mirror:
+    ref: thumb_home
+    distance: half_gap
+
+outlines:
+  keycaps:
+    - what: rectangle
+      where: true
+      size: [cap_w, cap_h]
+  switchplate:
+    - what: rectangle
+      where: true
+      size: [13.8, 13.8]           # Choc plate cutout
+
+  # PCB shape per half: 21 x 19 mm per-key blocks (they overlap and merge) + the top strip,
+  # then closed (grow, then shrink by pcb_close) to fill the notches between the splayed thumbs.
+  # The strip runs outer edge to inner edge and squares off the staggered num row.
+  _left_raw:
+    - what: rectangle
+      where: "-/^mirror_/"
+      size: [cx + 3, cy + 2]
+    - what: rectangle
+      where: {ref: matrix_middle_num, shift: [-0.5cx, 0.5 + 0.5top_margin]}
+      size: [6cx + 2, cy + 1 + top_margin]
+  _right_raw:
+    - what: rectangle
+      where: "/^mirror_/"
+      size: [cx + 3, cy + 2]
+    - what: rectangle
+      where: {ref: mirror_matrix_middle_num, shift: [-0.5cx, 0.5 + 0.5top_margin]}
+      size: [6cx + 2, cy + 1 + top_margin]
+  _left_grown: [{what: outline, name: _left_raw, expand: pcb_close}]
+  _right_grown: [{what: outline, name: _right_raw, expand: pcb_close}]
+  left_board: [{what: outline, name: _left_grown, expand: -pcb_close}]
+  right_board: [{what: outline, name: _right_grown, expand: -pcb_close}]
+  board:                           # both halves, for the DXF / preview
+    - what: outline
+      name: left_board
+    - what: outline
+      name: right_board
+
+  # Placement guides, drawn on Dwgs.User: the MCU area (free on both faces, ~36 x 17 mm) and
+  # the link USB-C (back side, flush with the top edge above the inner column).
+  left_guides:
+    - what: rectangle
+      where: {ref: matrix_outer_num, shift: [mcu_x, mcu_y]}
+      size: [mcu_area_w, mcu_area_h]
+    - what: rectangle
+      where: {ref: matrix_inner_num, shift: [0, usbc_y]}
+      size: [usbc_w, usbc_d]
+  right_guides:
+    - what: rectangle
+      where: {ref: mirror_matrix_outer_num, shift: [mcu_x, mcu_y]}
+      size: [mcu_area_w, mcu_area_h]
+    - what: rectangle
+      where: {ref: mirror_matrix_inner_num, shift: [0, usbc_y]}
+      size: [usbc_w, usbc_d]
+
+# Per-key parts only. The MCU circuit and other one-offs (host and link USB-C, level shifter,
+# LED resistor and bulk cap) come from the schematic and are placed in KiCad, in the MCU area
+# and the top strip. Everything sits on the back except the switches' keycap outlines.
+# Nets here are provisional: the KiCad schematic is the source of truth once it exists.
+pcbs:
+  left:
+    template: kicad8               # ceoloide footprints are KiCad 8 only
+    outlines:
+      edge:
+        outline: left_board
+        layer: Edge.Cuts
+      guides:
+        outline: left_guides
+        layer: Dwgs.User
+    footprints:
+      switch:
+        what: ceoloide/switch_choc_v1_v2
+        where: "-/^mirror_/"
+        params:
+          choc_v2_support: false   # PG1350 only: 3.4 mm center hole, no v2 corner pad
+          hotswap: true
+          include_keycap: true
+          keycap_width: cap_w
+          keycap_height: cap_h
+          from: "{{column_net}}"
+          to: "SW_{{colrow}}"
+      diode:
+        what: ceoloide/diode_tht_sod123
+        where: "-/^mirror_/"
+        adjust:                    # south-west of the switch, clear of the hotswap socket
+          shift: [-6.8, -4.5]
+          rotate: 90
+        params:
+          from: "SW_{{colrow}}"    # anode
+          to: "{{row_net}}"        # cathode
+      led:
+        what: ceoloide/led_sk6812mini-e
+        where: "-/^mirror_/"
+        adjust:
+          shift: [0, -4.7]         # under the Choc v1 LED window
+        params:
+          P1: 5V                   # VCC
+          P3: GND
+          P4: "LED_{{led_from}}"   # DIN
+          P2: "LED_{{colrow}}"     # DOUT
+          mirror:                  # mirrored colrows carry a mirror_ prefix; led_from doesn't
+            P4: "LED_mirror_{{led_from}}"
+      led_cap:
+        what: ergokb/cap_0603
+        where: "-/^mirror_/"
+        adjust:
+          shift: [6.8, -4.5]
+          rotate: 90
+        params:
+          from: 5V
+          to: GND
+  right:
+    $extends: pcbs.left
+    outlines:
+      edge.outline: right_board
+      guides.outline: right_guides
+    footprints:
+      switch.where: "/^mirror_/"
+      diode.where: "/^mirror_/"
+      led.where: "/^mirror_/"
+      led_cap.where: "/^mirror_/"
