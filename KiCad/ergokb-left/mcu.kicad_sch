@@ -7659,7 +7659,7 @@
 	)
 	(symbol
 		(lib_id "Eclectronics:SW")
-		(at 48.26 119.38 0)
+		(at 48.26 127 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -7670,7 +7670,7 @@
 		(fields_autoplaced yes)
 		(uuid "112a3196-ea95-41d3-afa3-e3ab28440907")
 		(property "Reference" "S30"
-			(at 49.53 118.1099 0)
+			(at 49.53 125.73 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7681,7 +7681,7 @@
 			)
 		)
 		(property "Value" "BOOT"
-			(at 49.53 120.6499 0)
+			(at 49.53 128.27 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -7692,7 +7692,7 @@
 			)
 		)
 		(property "Footprint" "Button_Switch_SMD:SW_SPST_B3U-1000P"
-			(at 49.53 116.84 90)
+			(at 49.53 124.46 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7703,7 +7703,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 49.53 116.84 90)
+			(at 49.53 124.46 90)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7714,7 +7714,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 48.26 119.38 0)
+			(at 48.26 127 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7970,6 +7970,87 @@
 			(project "ergokb-left"
 				(path "/981786d6-2b8c-457e-94c9-de9ab9f4e445/e97ad734-b3eb-4b01-92c3-1e1769b1bc60"
 					(reference "C39")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 48.26 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1b38b4cd-be8d-48de-9993-d031846d8de6")
+		(property "Reference" "R12"
+			(at 50.8 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1K"
+			(at 50.8 120.65 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 46.482 119.38 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 48.26 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 48.26 119.38 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "d500adc4-2d22-4f10-9883-302aee145d07")
+		)
+		(pin "2"
+			(uuid "db8d7a9b-bab0-4c8c-b0d6-229300d0973d")
+		)
+		(instances
+			(project "ergokb-left"
+				(path "/981786d6-2b8c-457e-94c9-de9ab9f4e445/e97ad734-b3eb-4b01-92c3-1e1769b1bc60"
+					(reference "R12")
 					(unit 1)
 				)
 			)
@@ -11569,7 +11650,7 @@
 	(symbol
 		(lib_name "GND_4")
 		(lib_id "power:GND")
-		(at 48.26 123.19 0)
+		(at 48.26 130.81 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -11580,7 +11661,7 @@
 		(fields_autoplaced yes)
 		(uuid "ad00e4df-2db2-4e78-9561-d085b7a45570")
 		(property "Reference" "#PWR08"
-			(at 48.26 129.54 0)
+			(at 48.26 137.16 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11591,7 +11672,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 48.26 128.27 0)
+			(at 48.26 135.89 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -11601,7 +11682,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 48.26 123.19 0)
+			(at 48.26 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11612,7 +11693,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 48.26 123.19 0)
+			(at 48.26 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11623,7 +11704,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 48.26 123.19 0)
+			(at 48.26 130.81 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
