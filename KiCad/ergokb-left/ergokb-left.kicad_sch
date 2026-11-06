@@ -2,9 +2,147 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid 981786d6-2b8c-457e-94c9-de9ab9f4e445)
+	(uuid "981786d6-2b8c-457e-94c9-de9ab9f4e445")
 	(paper "A4")
 	(lib_symbols)
+	(sheet
+		(at 153.67 29.21)
+		(size 119.38 111.76)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "816e236c-2579-48e7-b96a-c4d70fbaac26")
+		(property "Sheetname" "keys"
+			(at 153.67 28.4984 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "keys.kicad_sch"
+			(at 153.67 141.5546 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "ergokb-left"
+				(path "/981786d6-2b8c-457e-94c9-de9ab9f4e445"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 22.86 158.75)
+		(size 116.84 31.75)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8362c4b8-42bd-46d2-8434-1d97826d3359")
+		(property "Sheetname" "io"
+			(at 22.86 158.0384 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "io.kicad_sch"
+			(at 22.86 191.0846 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "ergokb-left"
+				(path "/981786d6-2b8c-457e-94c9-de9ab9f4e445"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 24.13 29.21)
+		(size 113.03 110.49)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "e97ad734-b3eb-4b01-92c3-1e1769b1bc60")
+		(property "Sheetname" "mcu"
+			(at 24.13 28.4984 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 24.13 140.2846 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "ergokb-left"
+				(path "/981786d6-2b8c-457e-94c9-de9ab9f4e445"
+					(page "3")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")

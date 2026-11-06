@@ -68,3 +68,4 @@ KiCad/**/~*.lck
 KiCad/**/*.kicad_prl
 KiCad/**/fp-info-cache
 KiCad/**/*.bak
+KiCad/**/_restore_backup_*/
