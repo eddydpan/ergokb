@@ -1,0 +1,6 @@
+(version 1)
+
+# SK6812MINI-E pads sit 0.21 mm from the footprint's own light cutout (by design).
+(rule "LED pads near their cutout"
+    (constraint edge_clearance (min 0.2mm))
+    (condition "A.memberOfFootprint('LED*')"))
