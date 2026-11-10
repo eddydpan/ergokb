@@ -16,13 +16,18 @@ meta:
 #   COL0..COL5 = outer..inner, COL6 = the four thumbs
 #   ROW0..ROW3 = num, top, home, bottom; thumbs: home ROW0, curl ROW1, palm ROW2, extra ROW3
 #
-# LED data chain (per half), set by `led_from` (the key whose LED feeds this one). Data starts
-# next to the MCU at the outer top corner; index = position in the WS2812 chain:
+# LED data chain (per half), set by `led_from` (the key whose LED feeds this one). Data enters at
+# the outer num key (LED_MCU, from the daughterboard); index = position in the WS2812 chain:
 #    0-3   outer   num -> bottom           16-19 index   num -> bottom
 #    4-7   pinky   bottom -> num           20-23 thumbs  palm, curl, extra, home
 #    8-11  ring    num -> bottom           24-27 inner   bottom -> num
 #   12-15  middle  bottom -> num
 #   Net LED_<colrow> is the DOUT of the LED at <colrow>; LED_MCU comes from the level shifter.
+#
+# PCB: ONE reversible main board (keys only) for both halves. The left half uses it as generated
+# (parts on the back); the right half is the same board flipped over (parts on the front). The
+# MCU, both USB-Cs and the level shifter live on the daughterboard (KiCad/ergokb-daughter), which
+# sits under the top of the board and connects through J1 (2x10 header, pinout in NOTES.md).
 # ---------------------------------------------------------------
 
 # Tuning knobs. KEY GEOMETRY FROZEN 2026-10-27 (paper-tested; PCB work builds on it).
@@ -50,21 +55,6 @@ units:
   thumb_splay: 12                  # deg per key going back toward the palm (~75 mm thumb arc)
   thumb_extra_drop: cy             # extra key sits this far below the curl/home midpoint
   half_gap: 60                     # mm between the two thumb clusters (preview only)
-  # Top strip (not key geometry; free to change). The MCU circuit (RP2354A core from
-  # custom-rpi-pico-2) goes on the back in the MCU area: the free pocket between the outer edge,
-  # the ring column and the top edge, above the outer/pinky num keys. Host USB-C exits the outer
-  # edge there. The link USB-C sits on the back above the inner column, opening up.
-  top_margin: 1.5                  # strip's top edge, above the middle column's PCB edge;
-                                   # each extra mm here is 1 mm more MCU area (and board height)
-  usbc_w: 8.94                     # HRO TYPE-C-31-M-12 body
-  usbc_d: 7.35
-  # Derived positions. MCU area from the outer num key; link USB-C from the inner num key.
-  # 0.5cx + 1.5 is half a key's PCB block (cx + 3, see _left_raw).
-  mcu_area_w: 2cx                                             # outer edge to the ring column's block
-  mcu_area_h: ring_stagger + middle_stagger - outer_stagger + top_margin   # num-key blocks to top edge
-  mcu_x: -(0.5cx + 1.5) + 0.5mcu_area_w
-  mcu_y: 0.5cy + 1 + 0.5mcu_area_h
-  usbc_y: -index_stagger - inner_stagger + 0.5cy + 1 + top_margin - 0.5usbc_d
   pcb_close: 4.5                   # mm; fills PCB-edge gaps narrower than 2x this (5 left a degenerate arc)
 
 points:
@@ -125,7 +115,7 @@ points:
           key.stagger: outer_stagger
           key.column_net: COL0
           key.led_from: "{{col.name}}_{{up}}"
-          rows.num.led_from: MCU   # first LED, fed by the level shifter next to the MCU
+          rows.num.led_from: MCU   # first LED, fed by the level shifter (daughterboard, via J1)
       rows: *finger_rows
 
     # Built from home back toward the palm; each key hinges on the previous
@@ -189,23 +179,17 @@ outlines:
       where: true
       size: [13.8, 13.8]           # Choc plate cutout
 
-  # PCB shape per half: 21 x 19 mm per-key blocks (they overlap and merge) + the top strip,
-  # then closed (grow, then shrink by pcb_close) to fill the notches between the splayed thumbs.
-  # The strip runs outer edge to inner edge and squares off the staggered num row.
+  # PCB shape per half: 21 x 19 mm per-key blocks (they overlap and merge), then closed (grow, then
+  # shrink by pcb_close) to fill the notches between the splayed thumbs. Keys only: the top strip
+  # and MCU pocket were removed 2026-11-10 when the MCU moved to the daughterboard.
   _left_raw:
     - what: rectangle
       where: "-/^mirror_/"
       size: [cx + 3, cy + 2]
-    - what: rectangle
-      where: {ref: matrix_middle_num, shift: [-0.5cx, 0.5 + 0.5top_margin]}
-      size: [6cx + 2, cy + 1 + top_margin]
   _right_raw:
     - what: rectangle
       where: "/^mirror_/"
       size: [cx + 3, cy + 2]
-    - what: rectangle
-      where: {ref: mirror_matrix_middle_num, shift: [-0.5cx, 0.5 + 0.5top_margin]}
-      size: [6cx + 2, cy + 1 + top_margin]
   _left_grown: [{what: outline, name: _left_raw, expand: pcb_close}]
   _right_grown: [{what: outline, name: _right_raw, expand: pcb_close}]
   left_board: [{what: outline, name: _left_grown, expand: -pcb_close}]
@@ -216,42 +200,26 @@ outlines:
     - what: outline
       name: right_board
 
-  # Placement guides, drawn on Dwgs.User: the MCU area (free on both faces, ~36 x 17 mm) and
-  # the link USB-C (back side, flush with the top edge above the inner column).
-  left_guides:
-    - what: rectangle
-      where: {ref: matrix_outer_num, shift: [mcu_x, mcu_y]}
-      size: [mcu_area_w, mcu_area_h]
-    - what: rectangle
-      where: {ref: matrix_inner_num, shift: [0, usbc_y]}
-      size: [usbc_w, usbc_d]
-  right_guides:
-    - what: rectangle
-      where: {ref: mirror_matrix_outer_num, shift: [mcu_x, mcu_y]}
-      size: [mcu_area_w, mcu_area_h]
-    - what: rectangle
-      where: {ref: mirror_matrix_inner_num, shift: [0, usbc_y]}
-      size: [usbc_w, usbc_d]
-
-# Per-key parts only. The MCU circuit and other one-offs (host and link USB-C, level shifter,
-# LED resistor and bulk cap) come from the schematic and are placed in KiCad, in the MCU area
-# and the top strip. Everything sits on the back except the switches' keycap outlines.
-# Nets here are provisional: the KiCad schematic is the source of truth once it exists.
+# Per-key parts only, all REVERSIBLE: the back copy serves the left half, the mirrored front copy
+# the right half (populate one side per half). ceoloide's switch and LED mirror themselves about the
+# key centre. The diode and cap use our ergokb/*_mirrored footprints, placed at the key centre with
+# the back-side offset as a param (ceoloide's reversible diode would stack both copies on one spot,
+# which collides with the mirrored socket). J1 (interface header) sits in the gap between the finger
+# and thumb keys, the one spot free on both faces. Nets are provisional: the KiCad schematic is the
+# source of truth.
 pcbs:
-  left:
+  main:
     template: kicad8               # ceoloide footprints are KiCad 8 only
     outlines:
       edge:
         outline: left_board
         layer: Edge.Cuts
-      guides:
-        outline: left_guides
-        layer: Dwgs.User
     footprints:
       switch:
         what: ceoloide/switch_choc_v1_v2
         where: "-/^mirror_/"
         params:
+          reversible: true         # sockets on both faces; front pads are the mirror image
           choc_v2_support: false   # PG1350 only: 3.4 mm center hole, no v2 corner pad
           hotswap: true
           include_keycap: true
@@ -260,42 +228,60 @@ pcbs:
           from: "{{column_net}}"
           to: "SW_{{colrow}}"
       diode:
-        what: ceoloide/diode_tht_sod123
+        what: ergokb/diode_sod123_mirrored
         where: "-/^mirror_/"
-        adjust:                    # south-west of the switch, clear of the hotswap socket
-          shift: [-6.8, -4.5]
-          rotate: 90
-        params:
+        params:                    # back copy south-west of the switch, clear of the socket
+          offset: [-6.8, -4.5]
+          angle: 90
           from: "SW_{{colrow}}"    # anode
           to: "{{row_net}}"        # cathode
       led:
         what: ceoloide/led_sk6812mini-e
         where: "-/^mirror_/"
         adjust:
-          shift: [0, -4.7]         # under the Choc v1 LED window
+          shift: [0, -4.7]         # under the Choc v1 LED window (on the key axis, so it mirrors onto itself)
         params:
-          P1: 5V                   # VCC
+          reversible: true
+          P1: +5V                  # VCC
           P3: GND
           P4: "LED_{{led_from}}"   # DIN
           P2: "LED_{{colrow}}"     # DOUT
-          mirror:                  # mirrored colrows carry a mirror_ prefix; led_from doesn't
-            P4: "LED_mirror_{{led_from}}"
       led_cap:
-        what: ergokb/cap_0603
+        what: ergokb/cap_0603_mirrored
         where: "-/^mirror_/"
-        adjust:
-          shift: [6.8, -4.5]
-          rotate: 90
-        params:
-          from: 5V
+        params:                    # back copy south-east of the switch
+          offset: [6.8, -4.5]
+          angle: 90
+          from: +5V
           to: GND
-  right:
-    $extends: pcbs.left
-    outlines:
-      edge.outline: right_board
-      guides.outline: right_guides
-    footprints:
-      switch.where: "/^mirror_/"
-      diode.where: "/^mirror_/"
-      led.where: "/^mirror_/"
-      led_cap.where: "/^mirror_/"
+      # Interface to the daughterboard: 2x10, 1.27 mm, through-hole (works from either face).
+      # Orientation-proof pinout (NOTES.md 2026-11-10): +5V on 1, 2, 19, 20 and GND on 9-12 map onto
+      # themselves however the board is flipped or the cable is turned; the other 12 pins are plain
+      # GPIO on the daughterboard, so the firmware remaps them per half.
+      interface:
+        what: ergokb/pin_header_2x10_127
+        where: matrix_middle_bottom
+        adjust:                    # origin = pin 1; centre lands at (108.0, 96.75), long axis ~15 deg off horizontal
+          shift: [-1.685, -11.354]
+          rotate: 75
+        params:
+          P1: +5V
+          P2: +5V
+          P19: +5V
+          P20: +5V
+          P9: GND
+          P10: GND
+          P11: GND
+          P12: GND
+          P3: LED_DATA             # 3.3 V data in -> level shifter (on this board) -> LED_MCU
+          P4: COL0
+          P5: COL1
+          P6: COL2
+          P7: COL3
+          P8: COL4
+          P13: COL5
+          P14: COL6
+          P15: ROW0
+          P16: ROW1
+          P17: ROW2
+          P18: ROW3
