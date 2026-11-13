@@ -17,11 +17,13 @@ meta:
 #   ROW0..ROW3 = num, top, home, bottom; thumbs: home ROW0, curl ROW1, palm ROW2, extra ROW3
 #
 # LED data chain (per half), set by `led_from` (the key whose LED feeds this one). Data enters at
-# the outer num key (LED_MCU, from the daughterboard); index = position in the WS2812 chain:
-#    0-3   outer   num -> bottom           16-19 index   num -> bottom
-#    4-7   pinky   bottom -> num           20-23 thumbs  palm, curl, extra, home
-#    8-11  ring    num -> bottom           24-27 inner   bottom -> num
-#   12-15  middle  bottom -> num
+# the middle bottom key, the LED nearest J1 and the level shifter (changed 2026-11-10; it used to
+# start at outer num). Index = position in the WS2812 chain:
+#    0     middle  bottom                   9-12  index   num -> bottom
+#    1-4   thumbs  palm, curl, extra, home  13-15 middle  home -> num
+#    5-8   inner   bottom -> num            16-19 ring    num -> bottom
+#                                           20-23 pinky   bottom -> num
+#                                           24-27 outer   num -> bottom
 #   Net LED_<colrow> is the DOUT of the LED at <colrow>; LED_MCU comes from the level shifter.
 #
 # PCB: ONE reversible main board (keys only) for both halves. The left half uses it as generated
@@ -56,6 +58,14 @@ units:
   thumb_extra_drop: cy             # extra key sits this far below the curl/home midpoint
   half_gap: 60                     # mm between the two thumb clusters (preview only)
   pcb_close: 4.5                   # mm; fills PCB-edge gaps narrower than 2x this (5 left a degenerate arc)
+  # Case and top plate (not key geometry; free to change). The case wall runs case_wall beyond the PCB
+  # edge; case_close fills the outline's notches, which is where the plate screws fit (a 3.5 mm wall
+  # is too thin for an M2 boss on the straight edges). The plate is the case outline with Choc v1
+  # cutouts; it sits ~2.2 mm above the PCB, clear of J1's solder joints and the shifter.
+  case_wall: 3.5
+  case_close: 12
+  plate_cutout: 13.8               # Choc v1 plate hole
+  plate_screw_r: 1.1               # M2 clearance hole (2.2 mm)
 
 points:
   zones:
@@ -72,17 +82,18 @@ points:
         ring:
           key.column_net: COL2
           key.led_from: "{{col.name}}_{{up}}"
-          rows.num.led_from: pinky_num
+          rows.num.led_from: middle_num
         middle:
           key.stagger: middle_stagger
           key.column_net: COL3
           key.led_from: "{{col.name}}_{{down}}"
-          rows.bottom.led_from: ring_bottom
+          rows.bottom.led_from: MCU   # first LED: fed by the level shifter next to J1
+          rows.home.led_from: index_bottom
         index:
           key.stagger: index_stagger
           key.column_net: COL4
           key.led_from: "{{col.name}}_{{up}}"
-          rows.num.led_from: middle_num
+          rows.num.led_from: inner_num
         inner:
           key.stagger: inner_stagger
           key.column_net: COL5
@@ -110,12 +121,12 @@ points:
         pinky:
           key.column_net: COL1
           key.led_from: "{{col.name}}_{{down}}"
-          rows.bottom.led_from: outer_bottom
+          rows.bottom.led_from: ring_bottom
         outer:
           key.stagger: outer_stagger
           key.column_net: COL0
           key.led_from: "{{col.name}}_{{up}}"
-          rows.num.led_from: MCU   # first LED, fed by the level shifter (daughterboard, via J1)
+          rows.num.led_from: pinky_num
       rows: *finger_rows
 
     # Built from home back toward the palm; each key hinges on the previous
@@ -145,7 +156,7 @@ points:
           key.origin: [0.5cx, -0.5cy]
           key.name: thumb_palm
           key.row_net: ROW2
-          key.led_from: index_bottom
+          key.led_from: middle_bottom
       rows:
         thumb:
 
@@ -194,6 +205,42 @@ outlines:
   _right_grown: [{what: outline, name: _right_raw, expand: pcb_close}]
   left_board: [{what: outline, name: _left_grown, expand: -pcb_close}]
   right_board: [{what: outline, name: _right_grown, expand: -pcb_close}]
+  # Case outline of one half (the right half is the same parts mirrored), the plate, and the plate
+  # screw positions. Screws sit in the filled notches: top step (pinky/ring), left of the thumbs,
+  # between the thumbs, the inner/thumb corner, and the inner edge. Shifts are from the middle
+  # bottom key (KiCad 104, 84.53); KiCad y = -ergogen y.
+  _case_grown: [{what: outline, name: left_board, expand: case_wall + case_close}]
+  case_outline: [{what: outline, name: _case_grown, expand: -case_close}]
+  screw_holes:
+    - {what: circle, where: {ref: matrix_middle_bottom, shift: [-32, 49.03]}, radius: plate_screw_r}
+    - {what: circle, where: {ref: matrix_middle_bottom, shift: [-9.5, -23.47]}, radius: plate_screw_r}
+    - {what: circle, where: {ref: matrix_middle_bottom, shift: [16.5, -39.47]}, radius: plate_screw_r}
+    - {what: circle, where: {ref: matrix_middle_bottom, shift: [43, -45.97]}, radius: plate_screw_r}
+    - {what: circle, where: {ref: matrix_middle_bottom, shift: [49.5, -18.97]}, radius: plate_screw_r}
+  plate:
+    - what: outline
+      name: case_outline
+    - what: rectangle
+      where: "-/^mirror_/"
+      size: [plate_cutout, plate_cutout]
+      operation: subtract
+    - what: outline
+      name: screw_holes
+      operation: subtract
+  # Placement guide on Dwgs.User: where the level shifter group fits, free on BOTH faces. Place each part
+  # twice (back copy + front copy at the same spot) and populate the face-down copy on each half.
+  # A: U (SOT-23-5), next to J1 pin 3 (LED_DATA). Strip under J1 (snug): its 100 nF and the 330 R. B: the 10 uF bulk cap,
+  # next to J1 pins 19/20 (+5V).
+  shifter_zones:
+    - what: rectangle
+      where: {ref: matrix_middle_bottom, shift: [-1.5, -15.72]}
+      size: [3.6, 3.6]
+    - what: rectangle
+      where: {ref: matrix_middle_bottom, shift: [3.6, -15.67], rotate: -15}
+      size: [5.5, 1.8]
+    - what: rectangle
+      where: {ref: matrix_middle_bottom, shift: [14, -15.22]}
+      size: [4.5, 7]
   board:                           # both halves, for the DXF / preview
     - what: outline
       name: left_board
@@ -214,6 +261,15 @@ pcbs:
       edge:
         outline: left_board
         layer: Edge.Cuts
+      shifter:
+        outline: shifter_zones
+        layer: Dwgs.User
+      case:                        # case wall and plate screws, for reference only
+        outline: case_outline
+        layer: Cmts.User
+      screws:
+        outline: screw_holes
+        layer: Cmts.User
     footprints:
       switch:
         what: ceoloide/switch_choc_v1_v2
@@ -285,3 +341,12 @@ pcbs:
           P16: ROW1
           P17: ROW2
           P18: ROW3
+
+  # Top plate: 1.2 mm FR4 from the PCB fab, no copper. One design for both halves (flip it for the
+  # right). Order it with the boards; pick 1.2 mm thickness.
+  plate:
+    template: kicad8
+    outlines:
+      edge:
+        outline: plate
+        layer: Edge.Cuts

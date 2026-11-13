@@ -1,6 +1,7 @@
 (version 1)
 
-# SK6812MINI-E pads sit 0.21 mm from the footprint's own light cutout (by design).
-(rule "LED pads near their cutout"
-    (constraint edge_clearance (min 0.2mm))
-    (condition "A.memberOfFootprint('LED*')"))
+# USB-C (GCT USB4105) land pattern: the signal pads sit 0.21 mm from the receptacle's own
+# unplated alignment-peg holes. That is the maker's pattern; allow it for J2/J3 only.
+(rule "USB-C pads near their peg holes"
+    (constraint hole_clearance (min 0.2mm))
+    (condition "A.memberOfFootprint('J2') || A.memberOfFootprint('J3') || B.memberOfFootprint('J2') || B.memberOfFootprint('J3')"))
