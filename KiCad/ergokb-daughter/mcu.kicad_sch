@@ -5245,7 +5245,7 @@
 	)
 	(text "Net names = left half; going to remap right half in firmware."
 		(exclude_from_sim no)
-		(at 183.134 115.824 0)
+		(at 203.2 120.015 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5482,11 +5482,11 @@
 		(uuid "feddb469-dbda-4539-b036-25dc91e1039f")
 	)
 	(no_connect
-		(at 151.13 119.38)
+		(at 151.13 38.1)
 		(uuid "0e63f7ee-ab18-4de2-9ff1-433720b8dd6a")
 	)
 	(no_connect
-		(at 151.13 149.86)
+		(at 151.13 43.18)
 		(uuid "0f482395-506a-4465-b5cf-30e6cd033229")
 	)
 	(no_connect
@@ -5494,7 +5494,7 @@
 		(uuid "23b1668f-30f4-4238-ad13-a24f2a4735f9")
 	)
 	(no_connect
-		(at 151.13 134.62)
+		(at 151.13 48.26)
 		(uuid "2733b963-5784-4176-a644-1c201374e8d5")
 	)
 	(no_connect
@@ -5502,7 +5502,7 @@
 		(uuid "2af32a41-f185-430c-a510-cef821c97f19")
 	)
 	(no_connect
-		(at 151.13 114.3)
+		(at 151.13 53.34)
 		(uuid "2b307d39-85b3-43a0-a112-aac521ee1d16")
 	)
 	(no_connect
@@ -5514,11 +5514,11 @@
 		(uuid "601ad1f6-7dbb-4153-8305-51d5fb40f08a")
 	)
 	(no_connect
-		(at 151.13 124.46)
+		(at 151.13 58.42)
 		(uuid "73eeb299-0145-467e-898c-70a5220028c1")
 	)
 	(no_connect
-		(at 151.13 139.7)
+		(at 151.13 63.5)
 		(uuid "83f0112c-eea9-44ac-a2c9-ae429a2d00cb")
 	)
 	(no_connect
@@ -5526,7 +5526,7 @@
 		(uuid "8c123b89-af99-444b-9047-81e4222fe518")
 	)
 	(no_connect
-		(at 151.13 129.54)
+		(at 151.13 68.58)
 		(uuid "9a5cdb5e-6b23-4b04-9629-75f65eecf5d1")
 	)
 	(no_connect
@@ -5534,7 +5534,7 @@
 		(uuid "9b510c73-c9fe-4b9d-9825-d285186c4990")
 	)
 	(no_connect
-		(at 151.13 160.02)
+		(at 151.13 109.22)
 		(uuid "a6285b9e-2e78-42d2-a102-82139cf9bbcb")
 	)
 	(no_connect
@@ -5711,7 +5711,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 93.98) (xy 152.4 93.98)
+			(xy 151.13 73.66) (xy 152.4 73.66)
 		)
 		(stroke
 			(width 0)
@@ -5731,7 +5731,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 58.42) (xy 152.4 58.42)
+			(xy 151.13 78.74) (xy 152.4 78.74)
 		)
 		(stroke
 			(width 0)
@@ -5751,7 +5751,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 48.26) (xy 152.4 48.26)
+			(xy 151.13 83.82) (xy 152.4 83.82)
 		)
 		(stroke
 			(width 0)
@@ -5821,7 +5821,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 53.34) (xy 152.4 53.34)
+			(xy 151.13 88.9) (xy 152.4 88.9)
 		)
 		(stroke
 			(width 0)
@@ -5901,7 +5901,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 43.18) (xy 152.4 43.18)
+			(xy 151.13 93.98) (xy 152.4 93.98)
 		)
 		(stroke
 			(width 0)
@@ -6001,7 +6001,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 78.74) (xy 152.4 78.74)
+			(xy 151.13 99.06) (xy 152.4 99.06)
 		)
 		(stroke
 			(width 0)
@@ -6161,7 +6161,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 83.82) (xy 152.4 83.82)
+			(xy 151.13 114.3) (xy 152.4 114.3)
 		)
 		(stroke
 			(width 0)
@@ -6401,16 +6401,6 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 43.18) (xy 66.04 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7cd4905c-731f-41be-babb-4ad4d91fe6eb")
-	)
-	(wire
-		(pts
 			(xy 87.63 114.3) (xy 88.9 114.3)
 		)
 		(stroke
@@ -6471,7 +6461,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 88.9) (xy 152.4 88.9)
+			(xy 151.13 119.38) (xy 152.4 119.38)
 		)
 		(stroke
 			(width 0)
@@ -6481,7 +6471,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 99.06) (xy 151.13 99.06)
+			(xy 152.4 124.46) (xy 151.13 124.46)
 		)
 		(stroke
 			(width 0)
@@ -6521,7 +6511,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 33.02) (xy 152.4 33.02)
+			(xy 151.13 129.54) (xy 152.4 129.54)
 		)
 		(stroke
 			(width 0)
@@ -6591,7 +6581,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 63.5) (xy 152.4 63.5)
+			(xy 151.13 134.62) (xy 152.4 134.62)
 		)
 		(stroke
 			(width 0)
@@ -6841,7 +6831,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 109.22) (xy 151.13 109.22)
+			(xy 152.4 139.7) (xy 151.13 139.7)
 		)
 		(stroke
 			(width 0)
@@ -6851,7 +6841,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 68.58) (xy 152.4 68.58)
+			(xy 151.13 149.86) (xy 152.4 149.86)
 		)
 		(stroke
 			(width 0)
@@ -6871,7 +6861,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 38.1) (xy 152.4 38.1)
+			(xy 151.13 154.94) (xy 152.4 154.94)
 		)
 		(stroke
 			(width 0)
@@ -6971,7 +6961,7 @@
 	)
 	(wire
 		(pts
-			(xy 151.13 73.66) (xy 152.4 73.66)
+			(xy 151.13 160.02) (xy 152.4 160.02)
 		)
 		(stroke
 			(width 0)
@@ -7200,7 +7190,7 @@
 		(uuid "94d9a714-432a-4e0f-9ff3-54ce91acd429")
 	)
 	(label "VBUS_SENSE"
-		(at 151.13 154.94 0)
+		(at 151.13 33.02 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7281,7 +7271,7 @@
 	)
 	(global_label "HAND"
 		(shape input)
-		(at 152.4 109.22 0)
+		(at 152.4 149.86 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7291,7 +7281,7 @@
 		)
 		(uuid "2ace2e5c-5cf9-4375-8ff3-df90f72c6429")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.4048 109.22 0)
+			(at 160.4048 149.86 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7305,7 +7295,7 @@
 	)
 	(global_label "LED_DATA"
 		(shape input)
-		(at 152.4 38.1 0)
+		(at 152.4 73.66 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7315,7 +7305,7 @@
 		)
 		(uuid "35c29db9-1e0b-4f5d-966b-cfc42c706c5f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 164.2147 38.1 0)
+			(at 164.2147 73.66 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7329,7 +7319,7 @@
 	)
 	(global_label "COL4"
 		(shape input)
-		(at 152.4 73.66 0)
+		(at 152.4 99.06 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7339,7 +7329,7 @@
 		)
 		(uuid "3e878ae2-1f4b-4580-9c15-1c172573930d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 73.66 0)
+			(at 160.2233 99.06 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7353,7 +7343,7 @@
 	)
 	(global_label "ROW0"
 		(shape input)
-		(at 152.4 58.42 0)
+		(at 152.4 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7363,7 +7353,7 @@
 		)
 		(uuid "5e7fa6e0-c28b-4d25-8a1e-ae4efdd35a51")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.6466 58.42 0)
+			(at 160.6466 124.46 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7377,7 +7367,7 @@
 	)
 	(global_label "ROW1"
 		(shape input)
-		(at 152.4 53.34 0)
+		(at 152.4 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7387,7 +7377,7 @@
 		)
 		(uuid "646b0724-359a-4626-b8be-e571bb7b1b5c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.6466 53.34 0)
+			(at 160.6466 129.54 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7401,7 +7391,7 @@
 	)
 	(global_label "ROW2"
 		(shape input)
-		(at 152.4 48.26 0)
+		(at 152.4 134.62 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7411,7 +7401,7 @@
 		)
 		(uuid "85b9b56b-37e6-4292-be69-e424dc539e6f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.6466 48.26 0)
+			(at 160.6466 134.62 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7425,7 +7415,7 @@
 	)
 	(global_label "LINK_RX"
 		(shape input)
-		(at 152.4 99.06 0)
+		(at 152.4 160.02 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7435,7 +7425,7 @@
 		)
 		(uuid "8da8ca97-3912-49fd-8425-25d3ab7b6573")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 163.0657 99.06 0)
+			(at 163.0657 160.02 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7449,7 +7439,7 @@
 	)
 	(global_label "COL5"
 		(shape input)
-		(at 152.4 68.58 0)
+		(at 152.4 114.3 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7459,7 +7449,7 @@
 		)
 		(uuid "968800fa-e46b-4bb9-a81b-f59442180077")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 68.58 0)
+			(at 160.2233 114.3 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7473,78 +7463,6 @@
 	)
 	(global_label "COL0"
 		(shape input)
-		(at 152.4 93.98 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9e08145d-a6bd-47b5-8b5d-7a4f29f47765")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 93.98 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "COL1"
-		(shape input)
-		(at 152.4 88.9 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9fcb9c31-d633-4709-8c51-fc32b68ad0fb")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 88.9 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "COL2"
-		(shape input)
-		(at 152.4 83.82 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b6ded1a8-97cc-45d9-9549-9992d79faacc")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 83.82 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "COL3"
-		(shape input)
 		(at 152.4 78.74 0)
 		(fields_autoplaced yes)
 		(effects
@@ -7553,7 +7471,7 @@
 			)
 			(justify left)
 		)
-		(uuid "ca30d9f2-9d9d-48ec-855d-dccdad86f12a")
+		(uuid "9e08145d-a6bd-47b5-8b5d-7a4f29f47765")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 160.2233 78.74 0)
 			(hide yes)
@@ -7567,9 +7485,81 @@
 			)
 		)
 	)
+	(global_label "COL1"
+		(shape input)
+		(at 152.4 83.82 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "9fcb9c31-d633-4709-8c51-fc32b68ad0fb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 160.2233 83.82 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "COL2"
+		(shape input)
+		(at 152.4 88.9 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b6ded1a8-97cc-45d9-9549-9992d79faacc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 160.2233 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
+	(global_label "COL3"
+		(shape input)
+		(at 152.4 93.98 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ca30d9f2-9d9d-48ec-855d-dccdad86f12a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 160.2233 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+	)
 	(global_label "LINK_TX"
 		(shape input)
-		(at 152.4 33.02 0)
+		(at 152.4 154.94 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7579,7 +7569,7 @@
 		)
 		(uuid "cafac398-11dd-4624-b0fe-01cb1e664012")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 162.7633 33.02 0)
+			(at 162.7633 154.94 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7593,7 +7583,7 @@
 	)
 	(global_label "ROW3"
 		(shape input)
-		(at 152.4 43.18 0)
+		(at 152.4 139.7 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7603,7 +7593,7 @@
 		)
 		(uuid "d1e7d0df-d2ca-4035-b3a4-f3b0520580ad")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.6466 43.18 0)
+			(at 160.6466 139.7 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7617,7 +7607,7 @@
 	)
 	(global_label "COL6"
 		(shape input)
-		(at 152.4 63.5 0)
+		(at 152.4 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7627,7 +7617,7 @@
 		)
 		(uuid "e584e6c9-79b5-483d-9c57-36397bc64b7b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.2233 63.5 0)
+			(at 160.2233 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -8385,7 +8375,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 143.8148 0)
 			(hide yes)
 			(show_name no)
@@ -9670,7 +9660,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 113.3348 0)
 			(hide yes)
 			(show_name no)
@@ -9907,7 +9897,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 77.47 164.1348 0)
 			(hide yes)
 			(show_name no)
@@ -10594,7 +10584,7 @@
 	(symbol
 		(lib_name "GND_1")
 		(lib_id "power:GND")
-		(at 66.04 44.45 0)
+		(at 66.04 43.18 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -10602,10 +10592,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "6349d45f-a7e0-4c13-91b1-3d994c7f469b")
 		(property "Reference" "#PWR014"
-			(at 66.04 50.8 0)
+			(at 66.04 49.53 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10616,7 +10605,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 66.04 49.53 0)
+			(at 69.596 45.212 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -10626,7 +10615,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 66.04 44.45 0)
+			(at 66.04 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10637,7 +10626,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 66.04 44.45 0)
+			(at 66.04 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10648,7 +10637,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 66.04 44.45 0)
+			(at 66.04 43.18 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10855,7 +10844,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 157.48 170.18 90)
 			(hide yes)
 			(show_name no)
@@ -11329,7 +11318,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 118.4148 0)
 			(hide yes)
 			(show_name no)
@@ -11408,7 +11397,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 123.4948 0)
 			(hide yes)
 			(show_name no)
@@ -11568,7 +11557,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 157.48 175.26 90)
 			(hide yes)
 			(show_name no)
@@ -12114,7 +12103,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 82.55 34.798 90)
 			(hide yes)
 			(show_name no)
@@ -12288,7 +12277,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 138.7348 0)
 			(hide yes)
 			(show_name no)
@@ -12922,7 +12911,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 82.55 39.878 90)
 			(hide yes)
 			(show_name no)
@@ -13801,7 +13790,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 184.4548 0)
 			(hide yes)
 			(show_name no)
@@ -14043,7 +14032,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 49.2252 76.2 0)
 			(hide yes)
 			(show_name no)
@@ -14200,7 +14189,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 108.2548 0)
 			(hide yes)
 			(show_name no)
@@ -14514,7 +14503,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 87.63 179.3748 0)
 			(hide yes)
 			(show_name no)
@@ -14596,7 +14585,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 87.122 149.86 90)
 			(hide yes)
 			(show_name no)
