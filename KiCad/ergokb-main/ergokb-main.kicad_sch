@@ -1736,7 +1736,7 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 31.75) (xy 222.25 31.75)
+			(xy 217.17 31.75) (xy 222.25 31.75)
 		)
 		(stroke
 			(width 0)
@@ -1925,7 +1925,7 @@
 		(uuid "ef8dbd22-5222-4e96-92af-2212e0d646e1")
 	)
 	(label "LED_DATA"
-		(at 213.36 31.75 180)
+		(at 217.17 39.37 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2028,7 +2028,7 @@
 	)
 	(global_label "COL1"
 		(shape input)
-		(at 217.17 36.83 180)
+		(at 217.17 31.75 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2038,7 +2038,7 @@
 		)
 		(uuid "76c31526-416d-4162-9659-d72bbdd470e5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 209.3467 36.83 0)
+			(at 209.3467 31.75 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2100,7 +2100,7 @@
 	)
 	(global_label "COL2"
 		(shape input)
-		(at 217.17 39.37 180)
+		(at 217.17 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2110,7 +2110,7 @@
 		)
 		(uuid "97426ec1-0a48-45b4-a3a3-c1fc717d45e1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 209.3467 39.37 0)
+			(at 209.3467 36.83 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
