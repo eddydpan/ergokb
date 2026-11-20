@@ -7273,7 +7273,7 @@
 			)
 		)
 	)
-	(global_label "LED_DATA"
+	(global_label "COL1"
 		(shape input)
 		(at 152.4 73.66 0)
 		(fields_autoplaced yes)
@@ -7465,7 +7465,7 @@
 			)
 		)
 	)
-	(global_label "COL1"
+	(global_label "COL2"
 		(shape input)
 		(at 152.4 83.82 0)
 		(fields_autoplaced yes)
@@ -7489,7 +7489,7 @@
 			)
 		)
 	)
-	(global_label "COL2"
+	(global_label "LED_DATA"
 		(shape input)
 		(at 152.4 88.9 0)
 		(fields_autoplaced yes)
