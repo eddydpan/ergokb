@@ -552,7 +552,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2032,
+        "clearance": 0.1524,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -563,7 +563,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 2147483647,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.254,
+        "track_width": 0.1524,
         "tuning_profile": "",
         "via_diameter": 0.6096,
         "via_drill": 0.3048,
@@ -575,7 +575,7 @@
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 0,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.762,
+        "track_width": 0.508,
         "tuning_profile": "",
         "via_diameter": 0.6096,
         "via_drill": 0.3048
@@ -589,7 +589,7 @@
     "netclass_patterns": [
       {
         "netclass": "Power",
-        "pattern": "5V"
+        "pattern": "+5V"
       },
       {
         "netclass": "Power",
