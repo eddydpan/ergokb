@@ -7321,7 +7321,7 @@
 			)
 		)
 	)
-	(global_label "ROW0"
+	(global_label "ROW1"
 		(shape input)
 		(at 152.4 124.46 0)
 		(fields_autoplaced yes)
@@ -7345,7 +7345,7 @@
 			)
 		)
 	)
-	(global_label "ROW1"
+	(global_label "ROW2"
 		(shape input)
 		(at 152.4 129.54 0)
 		(fields_autoplaced yes)
@@ -7369,7 +7369,7 @@
 			)
 		)
 	)
-	(global_label "ROW2"
+	(global_label "COL5"
 		(shape input)
 		(at 152.4 134.62 0)
 		(fields_autoplaced yes)
@@ -7417,7 +7417,7 @@
 			)
 		)
 	)
-	(global_label "COL5"
+	(global_label "COL6"
 		(shape input)
 		(at 152.4 114.3 0)
 		(fields_autoplaced yes)
@@ -7585,7 +7585,7 @@
 			)
 		)
 	)
-	(global_label "COL6"
+	(global_label "ROW0"
 		(shape input)
 		(at 152.4 119.38 0)
 		(fields_autoplaced yes)
