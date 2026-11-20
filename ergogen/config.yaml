@@ -29,7 +29,7 @@ meta:
 # PCB: ONE reversible main board (keys only) for both halves. The left half uses it as generated
 # (parts on the back); the right half is the same board flipped over (parts on the front). The
 # MCU, both USB-Cs and the level shifter live on the daughterboard (KiCad/ergokb-daughter), which
-# sits under the top of the board and connects through J1 (2x10 header, pinout in NOTES.md).
+# sits under the top of the board and connects through J1 (1x20 hole row + soldered ribbon, pinout in NOTES.md).
 # ---------------------------------------------------------------
 
 # Tuning knobs. KEY GEOMETRY FROZEN 2026-10-27 (paper-tested; PCB work builds on it).
@@ -227,20 +227,18 @@ outlines:
     - what: outline
       name: screw_holes
       operation: subtract
-  # Placement guide on Dwgs.User: where the level shifter group fits, free on BOTH faces. Place each part
-  # twice (back copy + front copy at the same spot) and populate the face-down copy on each half.
-  # A: U (SOT-23-5), next to J1 pin 3 (LED_DATA). Strip under J1 (snug): its 100 nF and the 330 R. B: the 10 uF bulk cap,
-  # next to J1 pins 19/20 (+5V).
+  # Placement guide on Dwgs.User: where the level shifter group fits, free on BOTH faces (2026-11-20, for the
+  # 1x20 J1). Each part exists twice (back set U4/C29/C30/R12 = left half, front set U5/C31/C32/R13 = right
+  # half); populate only the face-down set. Strip above J1 (x 94.0-104.6, y 91.6-95.3): U, its 100 nF and the
+  # 330 R, between J1 pin 3 (LED_DATA) and LED5's DIN pads. Box below J1 pins 19/20 (x 117.5-121.3,
+  # y 99.0-101.4): the 10 uF bulk cap.
   shifter_zones:
     - what: rectangle
-      where: {ref: matrix_middle_bottom, shift: [-1.5, -15.72]}
-      size: [3.6, 3.6]
+      where: {ref: matrix_middle_bottom, shift: [-4.7, -8.92]}
+      size: [10.6, 3.7]
     - what: rectangle
-      where: {ref: matrix_middle_bottom, shift: [3.6, -15.67], rotate: -15}
-      size: [5.5, 1.8]
-    - what: rectangle
-      where: {ref: matrix_middle_bottom, shift: [14, -15.22]}
-      size: [4.5, 7]
+      where: {ref: matrix_middle_bottom, shift: [15.4, -15.67]}
+      size: [3.8, 2.4]
   board:                           # both halves, for the DXF / preview
     - what: outline
       name: left_board
@@ -251,8 +249,8 @@ outlines:
 # the right half (populate one side per half). ceoloide's switch and LED mirror themselves about the
 # key centre. The diode and cap use our ergokb/*_mirrored footprints, placed at the key centre with
 # the back-side offset as a param (ceoloide's reversible diode would stack both copies on one spot,
-# which collides with the mirrored socket). J1 (interface header) sits in the gap between the finger
-# and thumb keys, the one spot free on both faces. Nets are provisional: the KiCad schematic is the
+# which collides with the mirrored socket). J1 (interface, a 1x20 hole row) runs along the gap between
+# the finger and thumb keys, the one strip free on both faces. Nets are provisional: the KiCad schematic is the
 # source of truth.
 pcbs:
   main:
@@ -310,16 +308,17 @@ pcbs:
           angle: 90
           from: +5V
           to: GND
-      # Interface to the daughterboard: 2x10, 1.27 mm, through-hole (works from either face).
-      # Orientation-proof pinout (NOTES.md 2026-11-10): +5V on 1, 2, 19, 20 and GND on 9-12 map onto
-      # themselves however the board is flipped or the cable is turned; the other 12 pins are plain
-      # GPIO on the daughterboard, so the firmware remaps them per half.
+      # Interface to the daughterboard: 1x20, 1.27 mm, through-hole (works from either face); the
+      # 20-way ribbon is soldered straight in (2026-11-20; was 2x10). Orientation-proof pinout
+      # (NOTES.md): +5V on 1, 2, 19, 20 and GND on 9-12 map onto themselves under k -> 21 - k, the
+      # only other way a single row can land; the other 12 pins are plain GPIO on the daughterboard,
+      # so the firmware remaps them per half.
       interface:
-        what: ergokb/pin_header_2x10_127
+        what: ergokb/pin_header_1x20_127
         where: matrix_middle_bottom
-        adjust:                    # origin = pin 1; centre lands at (108.0, 96.75), long axis ~15 deg off horizontal
-          shift: [-1.685, -11.354]
-          rotate: 75
+        adjust:                    # origin = pin 1 at (95.935, 97.3); horizontal, pins run +x, centre x = 108.0
+          shift: [-8.065, -12.77]
+          rotate: 90
         params:
           P1: +5V
           P2: +5V
