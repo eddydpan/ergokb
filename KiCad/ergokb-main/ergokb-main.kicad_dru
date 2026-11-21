@@ -5,3 +5,23 @@
 (rule "USB-C pads near their peg holes"
     (constraint hole_clearance (min 0.2mm))
     (condition "A.memberOfFootprint('J2') || A.memberOfFootprint('J3') || B.memberOfFootprint('J2') || B.memberOfFootprint('J3')"))
+
+# ergogen's per-key vias (column via + diode-anode via, 0.6/0.3 mm, 0.2 mm apart): footprint geometry, not routing.
+(rule "ergogen key vias: size"
+    (constraint via_diameter (min 0.6mm))
+    (constraint hole_size (min 0.3mm))
+    (constraint annular_width (min 0.15mm))
+    (condition "A.Type == 'Via' && (A.NetName == 'COL*' || A.NetName == 'Net-(D*-A)')"))
+(rule "ergogen key vias: pair spacing"
+    (constraint clearance (min 0.18mm))
+    (condition "A.Type == 'Via' && B.Type == 'Via' && A.NetName == 'COL*' && B.NetName == 'Net-(D*-A)'"))
+
+# Reverse-mount LED footprints: the LED's own pads sit 0.21 mm from its own body cut-out.
+(rule "LED pads to their own cut-out"
+    (constraint edge_clearance (min 0.2mm))
+    (condition "A.memberOfFootprint('LED*') && B.memberOfFootprint('LED*')"))
+
+# J1 pad 2 (+5V, boxed in by the 1.27 mm header row) and C24 pad 2 (GND) only get one thermal spoke.
+(rule "single-spoke pads"
+    (constraint min_resolved_spokes 1)
+    (condition "A.memberOfFootprint('J1') || A.memberOfFootprint('C24')"))
