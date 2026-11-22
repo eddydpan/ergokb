@@ -2058,23 +2058,13 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 63.5) (xy 69.85 63.5)
+			(xy 58.42 66.04) (xy 81.28 66.04)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "17d68bda-ae45-4c0e-89a5-c2aa6d789c51")
-	)
-	(wire
-		(pts
-			(xy 69.85 63.5) (xy 69.85 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "25d0249f-cdb8-4cec-9534-8676bb5ff18e")
 	)
 	(wire
 		(pts
@@ -2158,7 +2148,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 66.04) (xy 77.47 66.04)
+			(xy 77.47 63.5) (xy 81.28 63.5)
 		)
 		(stroke
 			(width 0)
@@ -2258,7 +2248,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 66.04) (xy 77.47 60.96)
+			(xy 77.47 60.96) (xy 77.47 63.5)
 		)
 		(stroke
 			(width 0)
@@ -2375,16 +2365,6 @@
 			(type default)
 		)
 		(uuid "f923c72c-cf2e-435f-b350-8716c4600c49")
-	)
-	(wire
-		(pts
-			(xy 58.42 66.04) (xy 69.85 66.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb201975-63f6-4821-8578-0b46a3ad5a1b")
 	)
 	(label "LINK_DP"
 		(at 104.14 63.5 0)
